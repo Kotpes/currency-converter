@@ -67,7 +67,7 @@ class App extends Component<Props> {
       toValue,
       fromCurrencyCode,
       toCurrencyCode
-    } = this.props.store.state;
+    } = this.props.store.state;   
 
     const currencies = [
       { key: "EUR", text: "EUR", value: "EUR" },
@@ -84,6 +84,7 @@ class App extends Component<Props> {
           <div className="from-currency">
             <Input
               fluid
+              
               value={fromValue}
               label={
                 <Dropdown

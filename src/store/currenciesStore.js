@@ -60,10 +60,13 @@ class Store {
     let result;
     if (toCurrencyCode === "USD" && fromCurrencyCode === "USD") {
       return value;
-    } else if (toCurrencyCode === "USD") {
+    } else if (toCurrencyCode === "USD") {      
       result = value / this.rates[fromCurrencyCode];
       return result.toFixed(2);
-    } else {
+    } else if (fromCurrencyCode === "USD") {     
+      result = value * this.rates[toCurrencyCode]
+      return result.toFixed(2);
+    } else {      
       result = value / this.rates[fromCurrencyCode] * this.rates[toCurrencyCode];
       return result.toFixed(2);
     }
