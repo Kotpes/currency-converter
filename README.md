@@ -3,7 +3,7 @@ Simple proof-of-concept React app that offers simple conversion between EUR, GBP
 
 ## Prerequesits
 - [Yarn](https://yarnpkg.com) dependency manager
-- I'm using free account on openexchangerates.org, so `.env` has `APP_ID` var included. Otherwise, it should be in `.gitignore`
+- I'm using free account on openexchangerates.org, so `.env` has `APP_ID` var included. Otherwise, it should be in `.gitignore`. Note, that free account has a limit of requests/month. So, if you're getting an error - limit is probably is reached. In this case, just sign up to get your own `APP_ID` and replace the old one in `.env` 
 
 
 ## Tech stack
