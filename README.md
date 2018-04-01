@@ -1,8 +1,9 @@
 # What is this
-Simple proof-of-concept React app that offers simple conversion between EUR,GBP and USD. App uses latest exchanges rated (provided by http://openexchangerates.org API)
+Simple proof-of-concept React app that offers simple conversion between EUR, GBP and USD. App uses latest exchanges rates provided by http://openexchangerates.org API
 
 ## Prerequesits
 - [Yarn](https://yarnpkg.com) dependency manager
+- I'm using free account on openexchangerates.org, so `.env` has `APP_ID` var included. Otherwise, it should be in `.gitignore`
 
 
 ## Tech stack
@@ -13,7 +14,7 @@ Simple proof-of-concept React app that offers simple conversion between EUR,GBP 
 - Uses `css-grid` for layout
 
 ## How to run
-- Clone the project, `cd` into it and run `yarn` to install dependecnies
+- Clone the project, `cd` into it and run `yarn` to install dependencies
 - Run `yarn start` to run the project (will be opened in a browser window)
 - You might need to install `flow-bin` globally too. Just run `npm install flow-bin -g`
 
