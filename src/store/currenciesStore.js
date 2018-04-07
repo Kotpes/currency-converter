@@ -1,4 +1,6 @@
-import { observable, action, computed, runInAction, autorun } from "mobx";
+import { observable, action, computed, runInAction } from "mobx";
+import { create, persist } from "mobx-persist";
+import localForage from 'localforage'
 import { getRates } from "../api/apiClient";
 
 class Store {
@@ -12,9 +14,15 @@ class Store {
 
   @observable rates = {};
 
+  @persist('object') @observable
+  wallets = {
+    EUR: 5450.0,
+    USD: 1234.45,
+    GBP: 545.2
+  };
+
   async fetchRates() {
     this.rates = {};
-    this.status = "pending";
     try {
       const rates = await getRates();
       // after await, modifying state again, needs an actions:
@@ -23,9 +31,15 @@ class Store {
       });
     } catch (error) {
       runInAction(() => {
-        throw new Error(error)
+        throw new Error(error);
       });
     }
+  }
+
+  @action
+  convertCurrency(fromValue, fromWallet, toValue, toWallet) {
+    this.wallets[fromWallet] -= fromValue;
+    this.wallets[toWallet] += toValue;
   }
 
   @action
@@ -40,6 +54,8 @@ class Store {
 
   @action
   setFromValue(value) {
+    console.log(value);
+    
     this.state.fromValue = value ? parseFloat(value, 10) : 0;
   }
 
@@ -60,14 +76,15 @@ class Store {
     let result;
     if (toCurrencyCode === "USD" && fromCurrencyCode === "USD") {
       return value;
-    } else if (toCurrencyCode === "USD") {      
+    } else if (toCurrencyCode === "USD") {
       result = value / this.rates[fromCurrencyCode];
       return result.toFixed(2);
-    } else if (fromCurrencyCode === "USD") {     
-      result = value * this.rates[toCurrencyCode]
+    } else if (fromCurrencyCode === "USD") {
+      result = value * this.rates[toCurrencyCode];
       return result.toFixed(2);
-    } else {      
-      result = value / this.rates[fromCurrencyCode] * this.rates[toCurrencyCode];
+    } else {
+      result =
+        value / this.rates[fromCurrencyCode] * this.rates[toCurrencyCode];
       return result.toFixed(2);
     }
   }
@@ -96,9 +113,14 @@ class Store {
     }
   }
 }
+// Setting up hydrate to get @persist values from localStorage
+const hydrate = create({
+  storage: localForage,
+  jsonify: false,
+});
 
 const store = new Store();
 
 export default store;
-
-autorun(() => {});
+// hydrating
+hydrate('wallets', store);
