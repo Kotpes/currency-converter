@@ -1,9 +1,9 @@
 # What is this
-Simple proof-of-concept React app that offers simple conversion between EUR, GBP and USD. App uses latest exchanges rates provided by http://openexchangerates.org API
+Simple proof-of-concept React app that offers conversion between EUR, GBP and USD. App uses latest exchanges rates provided by http://openexchangerates.org API
 
 ## Prerequesits
 - [Yarn](https://yarnpkg.com) dependency manager
-- I'm using free account on openexchangerates.org, so `.env` has `APP_ID` var included. Otherwise, it should be in `.gitignore`. Note, that free account has a limit of requests/month. So, if you're getting an error - limit is probably is reached. In this case, just sign up to get your own `APP_ID` and replace the old one in `.env` 
+- I'm using free account on openexchangerates.org, so `.env` has `APP_ID` var included. Otherwise, it should be in `.gitignore`. Note, that free account has a limit of requests/month. So, if you're getting an error - limit is probably reached. In this case, just sign up to get your own `APP_ID` and replace the old one in `.env` 
 
 
 ## Tech stack
